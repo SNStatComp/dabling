@@ -3,12 +3,10 @@ AI-assisted classification
 
 Dabling is a research project of Statistics Netherlands.
 
-The demo shiny dashboard in this repository is one of the outputs of [ESSnet AIML4OS Work Package 10](https://github.com/AIML4OS/WP10).
-The dashboard serves as an example of what can be done with the Dabling concept, developed in the resaerch program at Statistics Netherlands. In this dashboard the  concept is applied to statistical classification activities.
+This repo contains a shiny dashboard developed within the joint international project [ESSnet AIML4OS Work Package 10](https://github.com/AIML4OS/WP10) that shows what can be done with the Dabling concept for classification.
 
-The dashboard contains synthetic texts and classification for now and will be extended later with more functionality.
+This first version of the dashboard contains synthetic texts and a demo classification to show the concept. Additional classifications and examples will be added later.
 
 Comments and suggestions welcome at:
-
-- Jeldrik Bakker: email todo
+- Jeldrik Bakker: j <dot> bakker <at> cbs.nl
 - Olav ten Bosch: o <dot> tenbosch <at> cbs.nl
