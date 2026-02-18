@@ -8,5 +8,5 @@ This repo contains a shiny dashboard developed within the joint international pr
 This first version of the dashboard contains synthetic texts and a demo classification to show the concept. Additional classifications and examples will be added later.
 
 Comments and suggestions welcome at:
-- Jeldrik Bakker: j <dot> bakker <at> cbs.nl
-- Olav ten Bosch: o <dot> tenbosch <at> cbs.nl
+- Jeldrik Bakker: j \<dot\> bakker \<at\> cbs.nl
+- Olav ten Bosch: o \<dot\> tenbosch \<at\> cbs.nl
