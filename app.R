@@ -1,5 +1,6 @@
 # app.R
 source("R/packages.R")
+source("R/utils_demo_agnews.R")
 source("R/utils_storage.R")
 source("R/utils_text.R")
 source("R/utils_openai.R")
@@ -16,6 +17,8 @@ source("R/modules-settings.R")
 # ---- Config laden ----
 config <- NULL
 config_path <- file.path("config", "config.yml")
+
+
 
 if (file.exists(config_path)) {
   config <- yaml::read_yaml(config_path)

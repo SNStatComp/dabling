@@ -1,4 +1,4 @@
-# R/modules-data.R
+
 data_ui <- function(id) {
   ns <- NS(id)
   sidebarLayout(
@@ -37,9 +37,9 @@ data_ui <- function(id) {
                  hr(),
                  h4("Sampling"),
                  awesomeCheckbox(ns("enable_sample"), "Use a sample of the data", TRUE),
-                 radioButtons(ns("sample_mode"), "Sample by", choices = c("N rows"="n","Fraction"="frac", "Per category (N per class)"="perclass"), inline=TRUE),
-                 numericInput(ns("sample_n"),    "Sample size (N)", value = 5000, min = 100, step = 100),
-                 numericInput(ns("sample_n_perclass"), "N per class", value = 1000, min = 10, step = 10),
+                 radioButtons(ns("sample_mode"), "Sample by", choices = c("N rows"="n","Fraction"="frac", "Per category (N per class)"="perclass"), inline=TRUE, selected = "perclass"),
+                 numericInput(ns("sample_n"),    "Sample size (N)", value = 100, min = 100, step = 100),
+                 numericInput(ns("sample_n_perclass"), "N per class", value = 25, min = 5, step = 5),
                  sliderInput(ns("sample_frac"),  "Sample fraction", min=0.01, max=1, value=0.10, step=0.01),
                  awesomeCheckbox(ns("sample_stratify"), "Stratify by label (if available)", TRUE),
                  numericInput(ns("sample_seed"), "Random seed", value = 42, min = 1, step = 1),
@@ -106,16 +106,15 @@ data_server <- function(id) {
       }
     }
     
-    # --- helper: sample exactly up to n_per per class (no oversampling) ---
+    # --- helper: sample exactly up to n_per per class ---
     sample_per_class <- function(dt, label_col, n_per, seed = 42L) {
       stopifnot(is.character(label_col), length(label_col) == 1L, nzchar(label_col))
       if (!label_col %in% names(dt)) stop("Label column '", label_col, "' not found in data.")
       set.seed(seed)
-      # IMPORTANT: pass character column name directly to by=  (portable across data.table versions)
       dt[, .SD[sample(.N, min(.N, as.integer(n_per)))], by = c(label_col)]
     }
     
-    # --- main sampling dispatcher (call this from your observeEvent) ---
+    # --- main sampling dispatcher ---
     apply_sampling <- function() {
       full <- rv$data_raw_full
       if (is.null(full)) return()
@@ -181,20 +180,12 @@ data_server <- function(id) {
           showNotification("Please install the 'textdata' package for the AG's News demo.", type="error")
           return(NULL)
         }
-        # Try to load; if missing, optionally auto-download
-        dt <- tryCatch({
-          textdata::dataset_ag_news(split = "train")
-        }, error = function(e) {
-          if (isTRUE(input$auto_download_demo)) {
-            showNotification("AG's News not found in cache. Attempting download to your {textdata} cache...", type = "message")
-            op <- options(textdata.ask = FALSE) # avoid interactive prompt if used by textdata
-            on.exit(options(op), add = TRUE)
-            # second attempt should trigger download
-            textdata::dataset_ag_news(split = "train")
-          } else {
-            stop(e)
-          }
-        })
+        # Try to load
+        dt <- load_agnews_demo(
+          split = "train",
+          clean = TRUE,
+          auto_download = isTRUE(input$auto_download_demo)
+        )
         # Ensure plain character columns
         for (col in intersect(c("class","title","description"), names(dt))) {
           dt[[col]] <- as.character(dt[[col]])
