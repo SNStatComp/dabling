@@ -3,8 +3,8 @@ scoring_ui <- function(id) {
   sidebarLayout(
     sidebarPanel(width = 4,
                  selectInput(ns("model_key"),"Model", choices = c("tfidf_llm_enrich")),
-                 sliderInput(ns("top_k"),"Top-K categories to keep", min=1, max=20, value=5),
-                 sliderInput(ns("threshold"),"Score threshold", min=0, max=1, value=0, step=0.01),
+                 sliderInput(ns("top_k"),"Top-K categories to keep", min=1, max=20, value=1),
+                 sliderInput(ns("threshold"),"Score threshold", min=0, max=1, value=0.01, step=0.01),
                  actionButton(ns("btn_score"),"Compute scores"),
                  hr(),
                  uiOutput(ns("category_filter_ui")),
