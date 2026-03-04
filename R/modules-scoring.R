@@ -20,7 +20,10 @@ scoring_ui <- function(id) {
       h4("Metrics (if labels provided)"),
       DTOutput(ns("metrics_summary")),
       h5("Per-class"),
-      DTOutput(ns("metrics_per_class"))
+      DTOutput(ns("metrics_per_class")),
+      hr(),
+      h5("Confusion matrix"),
+      DTOutput(ns("confusion_matrix"))
     )
   )
 }
@@ -90,6 +93,41 @@ scoring_server <- function(id, docs_enriched, cats_enriched, labels, language, c
       s_top1 <- s[rank==1L]
       m <- compute_metrics(s_top1, lbl)
       datatable(m$per_class, options = list(pageLength=10))
+    })
+    
+    output$confusion_matrix <- renderDT({
+      s <- rv$scores; lbl <- labels(); cats <- cats_enriched(); req(s, lbl, cats)
+      
+      pred1 <- s[rank == 1L, .(id, pred = as.character(category_id))]
+      truth <- copy(lbl[, .(id, truth = as.character(label))])
+      dt <- merge(pred1, truth, by = "id", all = FALSE)
+      dt <- dt[!is.na(truth)]
+      req(nrow(dt) > 0)
+      
+      known_levels <- as.character(cats$id)
+      observed_levels <- unique(c(dt$truth, dt$pred))
+      class_levels <- c(known_levels, setdiff(observed_levels, known_levels))
+      
+      counts <- dt[, .N, by = .(truth, pred)]
+      grid <- CJ(truth = class_levels, pred = class_levels, unique = TRUE)
+      counts <- merge(grid, counts, by = c("truth", "pred"), all.x = TRUE)
+      counts[is.na(N), N := 0L]
+      
+      cm <- dcast(counts, truth ~ pred, value.var = "N", fill = 0)
+      
+      label_map <- setNames(as.character(cats$name), as.character(cats$id))
+      pretty_label <- function(x) {
+        out <- unname(label_map[x])
+        out[is.na(out) | !nzchar(out)] <- x[is.na(out) | !nzchar(out)]
+        out
+      }
+      
+      setnames(cm, "truth", "Actual")
+      cm[, Actual := pretty_label(Actual)]
+      pred_cols <- setdiff(names(cm), "Actual")
+      setnames(cm, pred_cols, pretty_label(pred_cols))
+      
+      datatable(cm, options = list(scrollX = TRUE, pageLength = 20))
     })
     
     list(scores = reactive(rv$scores))
