@@ -1,4 +1,3 @@
-# R/utils_models.R
 model_registry <- new.env(parent = emptyenv())
 
 register_model <- function(key, fit_fn, predict_fn, label = key) {

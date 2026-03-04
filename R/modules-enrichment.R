@@ -1,4 +1,3 @@
-# R/modules-enrichment.R
 enrichment_ui <- function(id) {
   ns <- NS(id)
   sidebarLayout(
@@ -62,7 +61,7 @@ enrichment_server <- function(id, docs, schema, labels, language, ckpt_dir) {
         min_df    = input$seeds_min_df,
         ngram     = c(1L, as.integer(input$seeds_ngram_max)),
         max_global_df  = 0.40,     # drop very common terms
-        extra_stop     = TRUE,     # add news-specific stopwords
+        extra_stop     = TRUE,     # add relevant stopwords
         drop_shared_ge = 2L,       # remove seeds seen in >=2 classes
         min_token_len  = 3L
       )

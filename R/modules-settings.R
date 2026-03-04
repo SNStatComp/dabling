@@ -1,4 +1,3 @@
-# R/modules-settings.R
 settings_ui <- function(id) {
   ns <- NS(id)
   fluidRow(

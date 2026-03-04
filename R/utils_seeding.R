@@ -1,11 +1,3 @@
-# R/utils_seeding.R
-# Improved seed derivation from labeled data:
-# - strict cleaning (prep_text_strict)
-# - extra news stopwords
-# - binary features, DF filters, global DF cap
-# - log-odds with informative prior
-# - sharedness filtering across classes
-
 news_extra_stopwords <- function(language = "en") {
   days    <- c("monday","tuesday","wednesday","thursday","friday","saturday","sunday")
   months  <- tolower(month.name)

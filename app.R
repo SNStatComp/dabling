@@ -1,4 +1,3 @@
-# app.R
 source("R/packages.R")
 source("R/utils_demo_agnews.R")
 source("R/utils_storage.R")
@@ -26,12 +25,12 @@ if (file.exists(config_path)) {
   warning("config.yml niet gevonden in ./config – OpenAI-config wordt overgeslagen.")
 }
 
-# OpenAI API key uit config → environment variable
+# OpenAI API key from config → environment variable
 if (!is.null(config$openai$api_key) && nzchar(config$openai$api_key)) {
   Sys.setenv(OPENAI_API_KEY = config$openai$api_key)
 }
 
-# Standaard model voor zoekverrijking
+# Standard model for search enrichment
 if (!is.null(config$openai$model) && nzchar(config$openai$model)) {
   options(dabling_search_llm = config$openai$model)
 }

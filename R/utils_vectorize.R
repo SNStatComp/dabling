@@ -1,4 +1,3 @@
-# R/utils_vectorize.R
 tfidf_similarity <- function(docs_text, cats_text, language="en", vocab_prune_max_terms = 50000L) {
   stopw <- tryCatch(stopwords::stopwords(language), error=function(e) character())
   tok_fun <- text2vec::word_tokenizer

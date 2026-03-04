@@ -1,4 +1,3 @@
-
 data_ui <- function(id) {
   ns <- NS(id)
   sidebarLayout(
@@ -140,7 +139,6 @@ data_server <- function(id) {
         }
         n_per <- as.integer(input$sample_n_perclass)
         sampled <- sample_per_class(full, label_col = label_col, n_per = n_per, seed = input$sample_seed)
-        # data.table returns the grouping column as the first column if it wasn't already there; keep as-is
         rv$data_raw <- as.data.table(sampled)
         return()
       }

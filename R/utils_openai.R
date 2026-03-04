@@ -367,7 +367,7 @@ enrich_categories_llm <- function(
         debug = isTRUE(getOption("AUTOCLASSIFY_LLM_DEBUG", FALSE)),
         debug_log_dir = ckpt_dir,
         debug_tag = paste0("cats_", cid),
-        use_responses_api = FALSE   # <— force Chat first
+        use_responses_api = FALSE   
       )
       print(ans)
       kw <- unique(trimws(as.character(ans$keywords %||% character())))
@@ -415,7 +415,7 @@ enrich_texts_llm <- function(text_dt, text_col, api_key, model, target_lang="en"
         wrap_array_key="keywords",
         debug = isTRUE(getOption("AUTOCLASSIFY_LLM_DEBUG", FALSE)),
         debug_log_dir = ckpt_dir,
-        debug_tag = paste0("doc_", dt$id[i]),   # <-- fix
+        debug_tag = paste0("doc_", dt$id[i]),   
         use_responses_api = FALSE
       )
       

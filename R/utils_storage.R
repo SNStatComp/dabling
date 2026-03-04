@@ -1,4 +1,3 @@
-# R/utils_storage.R
 default_ckpt_dir <- file.path(tempdir(), "autoclassify_cache")
 if (!dir.exists(default_ckpt_dir)) dir.create(default_ckpt_dir, recursive = TRUE, showWarnings = FALSE)
 

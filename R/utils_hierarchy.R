@@ -1,4 +1,3 @@
-# R/utils_hierarchy.R
 compute_hierarchy_aggregation <- function(schema_dt) {
   sch <- data.table::copy(schema_dt)
   

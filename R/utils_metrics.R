@@ -1,4 +1,3 @@
-# R/utils_metrics.R
 compute_metrics <- function(scores_dt, truth_dt, truth_col = "label") {
   pred1 <- scores_dt[rank == 1L, .(id, pred = category_id)]
   dt <- merge(pred1, truth_dt[, .(id, truth = .SD[[truth_col]])], by="id", all.x=TRUE)

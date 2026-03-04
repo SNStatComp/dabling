@@ -1,4 +1,3 @@
-# R/modules-scoring.R
 scoring_ui <- function(id) {
   ns <- NS(id)
   sidebarLayout(

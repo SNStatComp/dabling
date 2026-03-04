@@ -1,4 +1,3 @@
-# R/utils_text.R
 norm_lang <- function(x) {
   if (is.null(x) || x == "" ) return("en")
   x <- tolower(x)
