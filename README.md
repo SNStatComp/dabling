@@ -3,7 +3,9 @@ AI-assisted classification
 
 Dabling is a research project of Statistics Netherlands.
 
-This repo contains a shiny dashboard developed within the joint international project [ESSnet AIML4OS Work Package 10](https://github.com/AIML4OS/WP10) that shows what can be done with the Dabling concept for classification.
+This repo contains the code of a shiny dashboard developed within the joint international project [ESSnet AIML4OS Work Package 10](https://github.com/AIML4OS/WP10) that shows what can be done with the Dabling concept for classification.
+
+The [dashboard is here](https://jcmuca-jeldrik-bakker.shinyapps.io/dabling/)
 
 The user can give in an OpenAI API Key that will be used for semantic text enrichtment in the classification task. The costs for this API key are for the user. With this demo, it will never exceed <TDOD> tokens, which is less then <TODO> Eur.
 
