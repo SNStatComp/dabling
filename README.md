@@ -7,7 +7,7 @@ This repo contains the code of a shiny dashboard developed within the joint inte
 
 The [dashboard is here](https://jcmuca-jeldrik-bakker.shinyapps.io/dabling/)
 
-The user can give in an OpenAI API Key that will be used for semantic text enrichtment in the classification task. The costs for this API key are for the user. With this demo, it will never exceed <TDOD> tokens, which is less then <TODO> Eur.
+The user can give in an OpenAI API Key that will be used for semantic text enrichtment in the classification task. The costs for this API key are for the user. With this demo, the costs are small, typically a few cents.
 
 This first version of the dashboard uses:
 - the AGNews dataset from the [textdata R-package](https://cran.r-project.org/package=textdata). The AGNews dataset is a collection of news articles, where each article is labeled with a topic (e.g. politics, sports, etc.).
